@@ -36,7 +36,7 @@ You can also manually pass in a command to launch an editor
 
 #####Options
 
-Configurable options are availabe, including what editors can be launched and the default editors.
+Configurable options are availabe, including what editors can be launched and the default editor.
 
     Exedit.configure do |config|
       config.editors[:cooleditor] = 'cooledtor -w'
