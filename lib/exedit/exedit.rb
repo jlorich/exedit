@@ -4,29 +4,30 @@ require 'dot_configure'
 
 # A ruby external editor interface
 module Exedit
-  include Configurable
+  extend DotConfigure
 
   class << self
     attr_accessor :editor
 
-    def open(**kwargs)
-      edit_command = options.editors[editor]
+    # Opens a file (defaults to a tempfile which will be deleted) for editing in the external editor
+    def open(file = nil, editor: nil, command: nil)
+      edit_command = command || options.editors[editor || default_editor]
 
-      Editor.new(edit_command, **kwargs).open
+      Editor.new(edit_command, file).open
     end
 
     # All editors available on the current system
     def available_editors
       if !defined? @options
-        base_editors.keys.select { |e| Command.which(e) }
+        base_editors.select { |_editor, command| Command.which(command.split(' ')[0]) }
       else
-        options.editors.keys.select { |e| Command.which(e) }
+        options.editors.select { |_editor, command| Command.which(command.split(' ')[0]) }
       end
     end
 
     private
 
-    def editor
+    def default_editor
       options.default_editor || available_editors.first
     end
 
@@ -35,13 +36,15 @@ module Exedit
         vi: 'vi',
         vim: 'vim',
         nano: 'nano',
-        pico: 'pico'
+        pico: 'pico',
+        sublime: 'subl -w -n',
+        textmate: 'mate -w'
       }
     end
 
     def default_options
       {
-        editors: base_editors.select { |key, value| available_editors.include? key }
+        editors: base_editors.select { |key, _value| available_editors.include? key }
       }
     end
   end

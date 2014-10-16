@@ -1,23 +1,31 @@
 require 'tempfile'
 
 module Exedit
+  # An exedit external editor instance
   class Editor
     attr_accessor :edit_command
 
-    def initialize(edit_command, **kwargs, &block)
+    def initialize(edit_command, file_path = nil)
+      @file_path = file_path
       @edit_command = edit_command
     end
 
     def open
-      system("#{edit_command} #{tempfile.path}")
+      system("#{edit_command} #{file.path}")
 
-      result = reload(tempfile).read
-      tempfile.unlink
+      result = reload(file).read
+
+      # Remove the tempfile if it exists
+      tempfile.unlink if @tempfile
 
       result
     end
 
     private
+
+    def file
+      @file ||= @file_path ? File.new(@file_path) : tempfile
+    end
 
     def tempfile
       @tempfile ||= Tempfile.new('ex-edit')
