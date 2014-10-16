@@ -39,11 +39,11 @@ You can also manually pass in a command to launch an editor
 Configurable options are availabe, including what editors can be launched and the default editor.
 
     Exedit.configure do |config|
-      config.editors[:cooleditor] = 'cooledtor -w'
+      config.editors[:cooleditor] = 'cooleditor -w'
       config.default_editor = :cooleditor
     end
 
-The following would add and set as default a hypothetical `cooleditor`
+The following would set a hypothetical `cooleditor` as the default editor, launched with a command of `cooleditor -w ./path/to/file`
 
 
 #### Availability
