@@ -1,6 +1,6 @@
 # Exedit
 
-Easily jump to external editors from a ruby script for input! (Like git does with commits)
+Easily jump to external editors from a ruby script for input. (Like git does with commit messages)
 
 ## Installation
 
