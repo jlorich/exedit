@@ -20,11 +20,19 @@ To open a file in the default external editor, simply call
 
 The script will pause until the editor closes and the saved result will be read and returned.
 
+If no file is specified, a tempfile will be generated and then destroyed immedately after the result is returned
+
+    result = Exedit.open
+
 #####Editors
 
 Commands to launch vim, nano, pico, sublime, and textmate are included by default. To open in a specific editor simply specify it when optining
 
-    result = Exedit.open ./path/to/file, :sublime
+    result = Exedit.open editor: :sublime
+
+You can also manually pass in a command to launch an editor
+
+     result = Exedit.open command: 'subl -n -w'
 
 #####Options
 
@@ -40,7 +48,7 @@ The following would add and set as default a hypothetical `cooleditor`
 
 #### Availability
 
-`Exedit.available_editors` will return all editors availble on the current system.  The default configuration options also only include editors installed on the current system. If no default_editor is specified it will default to the first available editor on the system (typically vi)
+`Exedit.available_editors` will return all editors availble on the current system.  The default configuration options also only include editors installed on the current system. If no `default_editor` is specified in the options, it will default to the first available editor on the system (typically vi)
 
 ## Contributing
 
