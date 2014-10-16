@@ -46,7 +46,7 @@ Configurable options are availabe, including what editors can be launched and th
 The following would set a hypothetical `cooleditor` as the default editor, launched with a command of `cooleditor -w ./path/to/file`
 
 
-#### Availability
+##### Editor Availability
 
 `Exedit.available_editors` will return all editors availble on the current system.  The default configuration options also only include editors installed on the current system. If no `default_editor` is specified in the options, it will default to the first available editor on the system (typically vi)
 
