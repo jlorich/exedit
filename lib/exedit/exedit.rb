@@ -11,9 +11,12 @@ module Exedit
 
     # Opens a file (defaults to a tempfile which will be deleted) for editing in the external editor
     def open(file = nil, editor: nil, command: nil)
-      edit_command = command || options.editors[editor || default_editor]
+      Editor.new(edit_command(editor, command), file).open
+    end
 
-      Editor.new(edit_command, file).open
+    # Edits the given content in a tempfile
+    def edit(content, editor: nil, command: nil)
+      Editor.new(edit_command(editor, command), content: content).open
     end
 
     # All editors available on the current system
@@ -27,8 +30,12 @@ module Exedit
 
     private
 
+    def edit_command(editor, command)
+      command || options.editors[editor || default_editor]
+    end
+
     def default_editor
-      options.default_editor || available_editors.first
+      options.default_editor || available_editors.keys.first
     end
 
     def base_editors
