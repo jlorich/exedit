@@ -24,6 +24,12 @@ If no file is specified, a tempfile will be generated and then destroyed immedat
 
     result = Exedit.open
 
+#####String editing
+
+You can also edit strings in external functions by using 
+
+   result = Exedit.edit "my string!"
+
 #####Editors
 
 Commands to launch vim, nano, pico, sublime, and textmate are included by default. To open in a specific editor simply specify it when optining
