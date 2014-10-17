@@ -28,7 +28,7 @@ If no file is specified, a tempfile will be generated and then destroyed immedat
 
 You can also edit strings in external functions by using 
 
-   result = Exedit.edit "my string!"
+    result = Exedit.edit "my string!"
 
 #####Editors
 
